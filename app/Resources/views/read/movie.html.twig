@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie</title>
+</head>
+<body>
+    <a href="/delete/movie?movieId={{ movie.id }}"> Delete movie</a>
+    <form action="/update/movie" method="post">
+        <input name="movieId" value="{{ movie.id }}"hidden>
+        Name: <br>
+        <input type="text" name='name' value="{{ movie.name }}"><br>
+        Year:
+        <input type="text" name='year' value="{{ movie.year }}"><br>
+        Description:
+        <input type="text" name='description' value="{{ movie.description }}"><br>
+        <input type="submit" value="Update"><br>
+    </form>
+
+    {% for member in crewMembers %}
+        {{ member.firstName }} {{ member.lastName }}
+        <td><a href="/delete/crew-member?memberId={{ member.id }}&movieId={{ movie.id }}">Delete crew member</a></td> <br>
+    {% endfor %}
+
+    <a href="/form/crew-member?movieId={{ movie.id }}"> Create new crew member</a><br><br>
+
+    <a href="/">Go home!</a>
+</body>
+</html>

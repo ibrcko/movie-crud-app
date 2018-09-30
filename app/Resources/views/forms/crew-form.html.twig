@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create crew member</title>
+</head>
+<body>
+    <form action="/create/crew-member" method="post">
+        <input type="hidden" name="movie-id" value="{{ movieId }}" ><br>
+        First name: <br>
+        <input type="text" name="first-name"><br>
+        Last name: <br>
+        <input type="text" name="last-name"><br>
+        Birth date: <br>
+        <input type="date" name="birth-date"><br>
+        Role: <br>
+        <select name="role">
+            {% for role in roles %}
+            <option name="role" value="{{ role.id }}">{{ role.role }}</option>
+            {% endfor %}
+        </select><br><br>
+        <input type="submit" value="Create"><br><br>
+
+        <a href="/read/movie?movieId={{ movieId }}">Go back to movie</a>
+    </form>
+</body>
+</html>

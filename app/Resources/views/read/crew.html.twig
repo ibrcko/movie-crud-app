@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crew members</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of birth</th>
+            <th>Movie</th>
+            <th>Role</th>
+        </tr>
+        {% for member in crewMembers %}
+            <tr>
+                <td>{{ member.id}}</td>
+                <td>{{ member.firstName }}</td>
+                <td>{{ member.lastName }}</td>
+                <td>{{ member.birthDate }}</td>
+                <td>{{ member.movie.name }}</td>
+                <td>{{ member.role.role }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Go home!</a>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Roles</title>
+</head>
+<body>
+<a href="/form/role"> Create new role </a>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Role</th>
+        <th>Delete</th>
+    </tr>
+    {% for role in roles %}
+        <tr>
+            <td>{{ role.id}}</td>
+            <td>{{ role.role}}</td>
+            <td><a href="/delete/role?roleId={{ role.id }}">Delete</a></td>
+        </tr>
+    {% endfor %}
+</table>
+<br><br>
+<a href="/">Go home!</a>
+
+</body>
+</html>

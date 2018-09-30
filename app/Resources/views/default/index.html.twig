@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link href="app/resources/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+{% block body %}
+    <a href="form/movie"> Create new movie </a>
+    <a href="read/roles"> All Roles </a>
+    <a href="read/crew-members"> All Crew members</a>
+
+    <table class="table table-hover">
+        <tr>
+            <th>Edit</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Description</th>
+        </tr>
+        {% for movie in movies %}
+            <tr>
+                <td> <a href="read/movie?movieId={{ movie.id }}"> Edit movie </a> </td>
+                <td> {{ movie.id }} </td>
+                <td> {{ movie.name }} </td>
+                <td> {{ movie.year }} </td>
+                <td> {{ movie.description }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>
