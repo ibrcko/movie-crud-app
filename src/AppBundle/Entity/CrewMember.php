@@ -147,8 +147,4 @@ class CrewMember
         $this->movie = $movie;
     }
 
-    public function deleteCrewMember()
-    {
-
-    }
 }

@@ -5,26 +5,40 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Create crew member</title>
 </head>
-<body>
-    <form action="/create/crew-member" method="post">
-        <input type="hidden" name="movie-id" value="{{ movieId }}" ><br>
-        First name: <br>
-        <input type="text" name="first-name"><br>
-        Last name: <br>
-        <input type="text" name="last-name"><br>
-        Birth date: <br>
-        <input type="date" name="birth-date"><br>
-        Role: <br>
-        <select name="role">
-            {% for role in roles %}
-            <option name="role" value="{{ role.id }}">{{ role.role }}</option>
-            {% endfor %}
-        </select><br><br>
-        <input type="submit" value="Create"><br><br>
-
-        <a href="/read/movie?movieId={{ movieId }}">Go back to movie</a>
-    </form>
+<body style="margin: 15px">
+    <div><h3>Create new crew member</h3>
+        <form action="/create/crew-member" method="post" >
+            <input type="hidden" name="movie-id" value="{{ movieId }}" ><br>
+            <div class="form-group">
+                <label for="first-name">First name: </label><br>
+                <input type="text" name="first-name" class="form-control"><br>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last name: </label> <br>
+                <input type="text" name="last-name" class="form-control"><br>
+            </div>
+            <div class="form-group">
+                <label for="birth-date">Birth date: </label><br>
+                <input type="date" name="birth-date" class="form-control"><br>
+            </div>
+            <div class="form-group">
+                <label for="role">Role: </label><br>
+                <select name="role" class="form-control form-control-lg">
+                    {% for role in roles %}
+                    <option name="role" value="{{ role.id }}">{{ role.role }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Create"><br><br>
+            </div>
+            <div>
+                <a href="/read/movie?movieId={{ movieId }}" class="btn btn-warning">Go back to movie</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

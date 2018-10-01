@@ -5,22 +5,36 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Create movie</title>
 </head>
-<body>
-<form action="/create/movie" method="post">
-    Name: <br>
-    <input type="text" name="name"><br>
-    Year: <br>
-    <input type="text" name="year"><br>
-    Description: <br>
-    <input type="text" name="description"><br>
-    {#Crew members: <br>
-        {% for member in crewMembers %}
-            <input type="checkbox" name="crewMembers[]" value="{{ member.id }}">{{ member.firstName }} {{  member.lastName }}
+<body style="margin: 15px">
+<div>
+    <h1>Create new movie</h1><br>
+    <div>
+        <form action="/create/movie" method="post">
+            <div class="form-group">
+                <label for="name"></label>Name: <br>
+                <input type="text" name="name" class="form-control"><br>
+            </div>
+            <div class="form-group">
+                <label for="year">Year: </label><br>
+                <input type="text" name="year" class="form-control"><br>
+            </div>
+            <div class="form-group">
+                <label for="description">Description: </label><br>
+                <textarea type="text" name="description" rows="3" class="form-control"> </textarea><br>
+            </div>
             <br>
-        {% endfor %}#}
-    <input type="submit" value="Create">
-</form>
+            <div>
+                <input type="submit" value="Create" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div>
+    <a href="/" class="btn btn-warning">Go home!</a>
+</div>
 </body>
 </html>

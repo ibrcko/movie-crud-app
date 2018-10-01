@@ -5,26 +5,31 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Roles</title>
 </head>
-<body>
-<a href="/form/role"> Create new role </a>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Role</th>
-        <th>Delete</th>
-    </tr>
-    {% for role in roles %}
+<body style="margin: 15px">
+    <h3>All crew member roles</h3><br>
+    <div>
+        <a href="/form/role" class="btn btn-primary"> Create new role </a>
+    </div>
+    <br>
+    <table class="table table-hover">
         <tr>
-            <td>{{ role.id}}</td>
-            <td>{{ role.role}}</td>
-            <td><a href="/delete/role?roleId={{ role.id }}">Delete</a></td>
+            <th>ID</th>
+            <th>Role</th>
+            <th>Delete</th>
         </tr>
-    {% endfor %}
-</table>
-<br><br>
-<a href="/">Go home!</a>
-
+        {% for role in roles %}
+            <tr>
+                <td>{{ role.id }}</td>
+                <td>{{ role.role }}</td>
+                <td><a href="/delete/role?roleId={{ role.id }}" class="btn">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div>
+        <a href="/" class="btn btn-warning">Go home!</a>
+    </div>
 </body>
 </html>

@@ -5,28 +5,61 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Movie</title>
 </head>
-<body>
-    <a href="/delete/movie?movieId={{ movie.id }}"> Delete movie</a>
+<body style="margin: 15px">
+    <h3>Edit movie</h3><br>
+
+    <div>
+        <a href="/delete/movie?movieId={{ movie.id }}" class="btn btn-danger"> Delete movie</a>
+    </div>
+    <br>
+
+    <div>
     <form action="/update/movie" method="post">
-        <input name="movieId" value="{{ movie.id }}"hidden>
-        Name: <br>
-        <input type="text" name='name' value="{{ movie.name }}"><br>
-        Year:
-        <input type="text" name='year' value="{{ movie.year }}"><br>
-        Description:
-        <input type="text" name='description' value="{{ movie.description }}"><br>
-        <input type="submit" value="Update"><br>
-    </form>
-
-    {% for member in crewMembers %}
-        {{ member.firstName }} {{ member.lastName }}
-        <td><a href="/delete/crew-member?memberId={{ member.id }}&movieId={{ movie.id }}">Delete crew member</a></td> <br>
-    {% endfor %}
-
-    <a href="/form/crew-member?movieId={{ movie.id }}"> Create new crew member</a><br><br>
-
-    <a href="/">Go home!</a>
+            <input name="movieId" value="{{ movie.id }}"hidden>
+        <div class="form-group">
+            <label for="name">Name:</label> <br>
+            <input type="text" name='name' value="{{ movie.name }}" class="form-control"><br>
+        </div>
+        <div class="form-group">
+            <label for="year">Year:</label>
+            <input type="text" name='year' value="{{ movie.year }}" class="form-control"><br>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name='description' class="form-control" rows="3">{{ movie.description }}</textarea><br>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Update movie" class="btn btn-primary"><br>
+        </div>
+        </form>
+    </div>
+    <hr>
+    <div>
+        <table class="table table-hover">
+            <tr>
+                <th>Member</th>
+                <th>Role</th>
+                <th>Delete</th>
+            </tr>
+            {% for member in crewMembers %}
+                <tr>{% dump(member) %}
+                    <td>{{ member.firstName }} {{ member.lastName }}</td>
+                    <td>{{ member.getRole.getRole }}</td>
+                    <td>
+                        <a href="/delete/crew-member?memberId={{ member.id }}&movieId={{ movie.id }}" class="btn">Delete crew member</a>
+                    </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div>
+        <a href="/form/crew-member?movieId={{ movie.id }}" class="btn btn-success"> Create new crew member</a><br><br>
+    </div>
+    <div>
+        <a href="/" class="btn btn-warning">Go home!</a>
+    </div>
 </body>
 </html>

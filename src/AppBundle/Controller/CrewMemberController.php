@@ -69,12 +69,6 @@ class CrewMemberController extends Controller
             ->getRepository(CrewMember::class)
             ->findAll();
 
-        if (!$crewMembers) {
-            throw $this->createNotFoundException(
-                'No crew members found'
-            );
-        }
-
         return $this->render('read/crew.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'crewMembers' => $crewMembers,

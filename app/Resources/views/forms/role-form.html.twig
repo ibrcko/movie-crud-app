@@ -5,14 +5,23 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Create a role</title>
 </head>
-<body>
-<form action="/create/role" method="post">
-    Role: <br>
-    <input type="text" name="role"><br>
-    <input type="submit" value="Create"><br>
+<body style="margin: 15px">
+    <h3>Create new role</h3><br>
+    <div>
+        <form action="/create/role" method="post">
+            <div class="form-group">
+                <label>Role:</label> <br>
+                <input type="text" name="role" class="form-control"><br>
+            </div>
+            <input type="submit" value="Create" class="btn btn-primary"><br>
 
-</form>
+        </form>
+    </div>
+    <div>
+        <a href="/" class="btn btn-warning">Go home!</a>
+    </div>
 </body>
 </html>

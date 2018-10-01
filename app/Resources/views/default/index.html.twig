@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
-    <link href="app/resources/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
-<body>
+<body style="margin: 15px">
 {% block body %}
-    <a href="form/movie"> Create new movie </a>
-    <a href="read/roles"> All Roles </a>
-    <a href="read/crew-members"> All Crew members</a>
-
+    <div>
+        <a href="form/movie" class="btn btn-primary"> Create new movie </a>
+        <a href="read/roles" class="btn btn-success"> All Roles </a>
+        <a href="read/crew-members" class="btn btn-success"> All Crew members</a>
+    </div><br>
     <table class="table table-hover">
         <tr>
             <th>Edit</th>
@@ -23,7 +24,7 @@
         </tr>
         {% for movie in movies %}
             <tr>
-                <td> <a href="read/movie?movieId={{ movie.id }}"> Edit movie </a> </td>
+                <td> <a href="read/movie?movieId={{ movie.id }}"class="btn"> Edit movie </a> </td>
                 <td> {{ movie.id }} </td>
                 <td> {{ movie.name }} </td>
                 <td> {{ movie.year }} </td>

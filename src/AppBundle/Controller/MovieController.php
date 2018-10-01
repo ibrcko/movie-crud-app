@@ -15,13 +15,8 @@ class MovieController extends Controller
      */
     public function formMovie()
     {
-        $crewMembers = $this->getDoctrine()
-            ->getRepository(CrewMember::class)
-            ->findAll();
-
         return $this->render('forms/movie-form.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'crewMembers' => $crewMembers,
             ]);
     }
 
