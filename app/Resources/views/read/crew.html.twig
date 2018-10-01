@@ -20,7 +20,7 @@
             <th>Movie</th>
             <th>Role</th>
         </tr>
-        {% for member in crewMembers %}
+        {% for member in my_pager.currentPageResults %}
             <tr>
                 <td>{{ member.id}}</td>
                 <td>{{ member.firstName }}</td>
@@ -31,6 +31,7 @@
             </tr>
         {% endfor %}
     </table>
+    {{ pagerfanta(my_pager, 'twitter_bootstrap3', { 'omitFirstPage': true }) }}
     <br>
     <div>
         <a href="/" class="btn btn-warning">Go home!</a>

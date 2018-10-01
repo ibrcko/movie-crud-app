@@ -14,19 +14,19 @@
             <input type="hidden" name="movie-id" value="{{ movieId }}" ><br>
             <div class="form-group">
                 <label for="first-name">First name: </label><br>
-                <input type="text" name="first-name" class="form-control"><br>
+                <input type="text" name="first-name" class="form-control" required><br>
             </div>
             <div class="form-group">
                 <label for="last-name">Last name: </label> <br>
-                <input type="text" name="last-name" class="form-control"><br>
+                <input type="text" name="last-name" class="form-control" required><br>
             </div>
             <div class="form-group">
                 <label for="birth-date">Birth date: </label><br>
-                <input type="date" name="birth-date" class="form-control"><br>
+                <input type="date" name="birth-date" class="form-control" required><br>
             </div>
             <div class="form-group">
                 <label for="role">Role: </label><br>
-                <select name="role" class="form-control form-control-lg">
+                <select name="role" class="form-control form-control-lg" required>
                     {% for role in roles %}
                     <option name="role" value="{{ role.id }}">{{ role.role }}</option>
                     {% endfor %}

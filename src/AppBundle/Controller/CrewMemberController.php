@@ -5,10 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\CrewMember;
 use AppBundle\Entity\Movie;
 use AppBundle\Entity\Role;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -63,15 +64,21 @@ class CrewMemberController extends Controller
     /**
      * @Route("read/crew-members", name="read_crew_members")
      */
-    public function readCrewMembers()
+    public function readCrewMembers(Request $request)
     {
-        $crewMembers = $this->getDoctrine()
-            ->getRepository(CrewMember::class)
-            ->findAll();
+        $page = $request->query->get('page', 1);
+        $entityManager = $this->getDoctrine()->getManager();
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('cm')
+            ->from('AppBundle\Entity\CrewMember' , 'cm');
+
+        $adapter = new DoctrineORMAdapter($queryBuilder);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setCurrentPage($page);
 
         return $this->render('read/crew.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'crewMembers' => $crewMembers,
+            'my_pager' => $pagerfanta,
         ]);
     }
 

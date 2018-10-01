@@ -45,7 +45,7 @@
                 <th>Delete</th>
             </tr>
             {% for member in crewMembers %}
-                <tr>{% dump(member) %}
+                <tr>
                     <td>{{ member.firstName }} {{ member.lastName }}</td>
                     <td>{{ member.getRole.getRole }}</td>
                     <td>

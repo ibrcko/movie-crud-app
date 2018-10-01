@@ -22,7 +22,7 @@
             <th>Year</th>
             <th>Description</th>
         </tr>
-        {% for movie in movies %}
+        {% for movie in my_pager.currentPageResults %}
             <tr>
                 <td> <a href="read/movie?movieId={{ movie.id }}"class="btn"> Edit movie </a> </td>
                 <td> {{ movie.id }} </td>
@@ -33,6 +33,9 @@
         {% endfor %}
     </table>
 {% endblock %}
+<div class="pagerfanta">
+    {{ pagerfanta(my_pager, 'twitter_bootstrap3', { 'omitFirstPage': true }) }}
+</div>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
