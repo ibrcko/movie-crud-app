@@ -75,31 +75,40 @@ class MovieController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'movie' => $movie,
             'crewMembers' => $crewMembers,
+            'error' => $request->query->get('error'),
         ]);
     }
 
     /**
-     * @Route("/update/movie", name="update")
+     * @Route("/update/movie", name="update_movie")
      */
     public function updateMovie(Request $request)
     {
         $movieId = $request->request->get('movieId');
 
+        $name = $request->request->get('name');
+        $year = $request->request->get('year');
+        $description = $request->request->get('description');
+
         $entityManager = $this->getDoctrine()->getManager();
         $movie = $entityManager->getRepository(Movie::class)->find($movieId);
 
-        if (!$movie) {
-            throw $this->createNotFoundException(
-                'No movie found for id: ' . $movieId
-            );
+        $movies = $this->getDoctrine()
+            ->getRepository(Movie::class)
+            ->findAll();
+
+        foreach ($movies as $movie)
+        {
+            if ($name == $movie->getName() && $year == $movie->getYear())
+                return $this->redirectToRoute('read_movie', ['movieId' => $movieId, 'error' => 1]);
         }
 
-        $movie->setName($request->request->get('name'));
-        $movie->setYear($request->request->get('year'));
-        $movie->setDescription($request->request->get('description'));
+        $movie->setName($name);
+        $movie->setYear($year);
+        $movie->setDescription($description);
         $entityManager->flush();
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('read_movie', ['movieId' => $movie->getId()]);
 
     }
 
