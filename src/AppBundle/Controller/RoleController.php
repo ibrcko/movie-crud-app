@@ -102,4 +102,28 @@ class RoleController extends Controller
             $entityManager->flush();
         }
     }
+
+    /**
+     * @Route("/seed/roles", name="seed_roles")
+     */
+    public function seedMovies(Request $request)
+    {
+        $num = $request->query->get('num');
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        for ($i = 0; $i < $num; $i++)
+        {
+            $seededRole = "Seeded role $i";
+
+            $role = new Role();
+            $role->setRole($seededRole);
+
+            $entityManager->persist($role);
+        }
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('read_roles');
+    }
 }

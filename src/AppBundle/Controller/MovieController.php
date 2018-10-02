@@ -170,4 +170,32 @@ class MovieController extends Controller
         }
     }
 
+    /**
+     * @Route("/seed/movies", name="seed_movies")
+     */
+    public function seedMovies(Request $request)
+    {
+        $num = $request->query->get('num');
+        $description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et auctor purus, at rutrum velit. 
+                        Donec est ligula, viverra sed dignissim vel, tempor id nisl.';
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        for ($i = 0; $i < $num; $i++)
+        {
+            $name = "Seeded movie $i";
+            $year = $i;
+
+            $movie = new Movie();
+            $movie->setName($name);
+            $movie->setYear($year);
+            $movie->setDescription($description);
+
+            $entityManager->persist($movie);
+        }
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('homepage');
+    }
 }
