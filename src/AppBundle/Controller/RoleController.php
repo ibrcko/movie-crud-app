@@ -13,6 +13,7 @@ class RoleController extends Controller
     /**
      * @Route("/form/role", name="form_role")
      */
+    // method that renders role form for creation
     public function formRole(Request $request)
     {
         return $this->render('forms/role-form.html.twig', [
@@ -24,12 +25,16 @@ class RoleController extends Controller
     /**
      * @Route("/create/role", name="create_role")
      */
+    // method that gathers parameters from request
+    // creates new role with gathered parameters
+    // redirects to read_roles
     public function createRole(Request $request)
     {
+        $roleParam = $request->request->get('role');
         $entityManager = $this->getDoctrine()->getManager();
 
         $role = new Role();
-        $role->setRole($request->request->get('role'));
+        $role->setRole($roleParam);
 
         $entityManager->persist($role);
 
@@ -41,6 +46,8 @@ class RoleController extends Controller
     /**
      * @Route("read/roles", name="read_roles")
      */
+    // fetches all roles from the db
+    // renders role view
     public function readRoles(Request $request)
     {
         $roles = $this->getDoctrine()
@@ -56,6 +63,12 @@ class RoleController extends Controller
     /**
      * @Route("/delete/role", name="delete_role")
      */
+    // gathers request parameters
+    // fetches role by roleId from the db
+    // fetches crew members related to the role
+    // deletes crew members
+    // deletes role
+    // redirects to read_roles
     public function deleteRole(Request $request)
     {
         $roleId = $request->query->get('roleId');
@@ -79,8 +92,8 @@ class RoleController extends Controller
 
     }
 
+    // deletes every crew member that has been provided through argument
     private function deleteCrewMembers($crewMembers)
-
     {
         $entityManager = $this->getDoctrine()->getManager();
 

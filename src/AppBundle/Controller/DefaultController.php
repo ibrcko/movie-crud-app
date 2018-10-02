@@ -14,6 +14,11 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
+    // gathers page parameter from request defaulted to 1
+    // selects all movies from db
+    // creates pagerfanta object with gathered movies
+    // sets pagerfanta current page to gathered page parameter
+    // renders index view
     public function indexAction(Request $request)
     {
         $page = $request->query->get('page', 1);

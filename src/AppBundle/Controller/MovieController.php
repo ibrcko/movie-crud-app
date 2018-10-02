@@ -12,6 +12,7 @@ class MovieController extends Controller
     /**
      * @Route("/form/movie", name="form_movie")
      */
+    // method that renders movie form for creation
     public function formMovie(Request $request)
     {
         return $this->render('forms/movie-form.html.twig', [
@@ -23,6 +24,10 @@ class MovieController extends Controller
     /**
      * @Route("/create/movie", name="create")
      */
+    // method that gathers parameters from request
+    // checks that request movie name and year are unique
+    // creates new movie with gathered parameters
+    // redirects to homepage
     public function createMovie(Request $request)
     {
         $name = $request->request->get('name');
@@ -56,6 +61,9 @@ class MovieController extends Controller
     /**
      * @Route("/read/movie", name="read_movie")
      */
+    // fetches movie from the db by movieId parameter
+    // fetches crew members related to the movie
+    // renders movie view
     public function readMovie(Request $request)
     {
         $movieId = $request->query->get('movieId');
@@ -82,6 +90,12 @@ class MovieController extends Controller
     /**
      * @Route("/update/movie", name="update_movie")
      */
+    // gathers request parameters
+    // fetches movie by movieId from the db
+    // fetches all movies from the db
+    // checks that request movie name and year are unique
+    // updates movie
+    // redirects to read_movie
     public function updateMovie(Request $request)
     {
         $movieId = $request->request->get('movieId');
@@ -99,7 +113,7 @@ class MovieController extends Controller
 
         foreach ($movies as $movie)
         {
-            if ($name == $movie->getName() && $year == $movie->getYear())
+            if ($movieId != $movie->getId() && $name == $movie->getName() && $year == $movie->getYear())
                 return $this->redirectToRoute('read_movie', ['movieId' => $movieId, 'error' => 1]);
         }
 
@@ -115,6 +129,12 @@ class MovieController extends Controller
     /**
      * @Route("/delete/movie", name="delete")
      */
+    // gathers request parameters
+    // fetches movie by movieId from the db
+    // fetches crew members related to the movie
+    // deletes crew members
+    // deletes movie
+    // redirects to homepage
     public function deleteMovie(Request $request)
     {
         $movieId = $request->query->get('movieId');
@@ -139,6 +159,7 @@ class MovieController extends Controller
 
     }
 
+    // deletes every crew member that has been provided through argument
     private function deleteCrewMembers($crewMembers)
     {
         $entityManager = $this->getDoctrine()->getManager();
